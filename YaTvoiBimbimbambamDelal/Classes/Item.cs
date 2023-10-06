@@ -10,13 +10,15 @@ namespace YaTvoiBimbimbambamDelal.Classes
         public double Weight { get; set; }
         public double Cost { get; set; }
         public string Type { get; set; }
+        public bool Status { get; set; }
 
-        public Item(string name, double weight, double cost, string type)
+        public Item(string name, double weight, double cost, string type, bool status)
         {
             Name = name;
             Weight = weight;
             Cost = cost;
             Type = type;
+            Status = status;
         }
         public virtual string Display()
         {

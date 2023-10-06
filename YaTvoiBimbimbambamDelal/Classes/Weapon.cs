@@ -8,8 +8,8 @@ namespace YaTvoiBimbimbambamDelal.Classes
     {
         public double Damage { get; set; }
 
-        public Weapon(double damage, string name, double weight, double cost, string type) 
-            : base(name, weight, cost, type)
+        public Weapon(double damage, string name, double weight, double cost, string type, bool status) 
+            : base(name, weight, cost, type, status)
         {
             Damage = damage;
         }

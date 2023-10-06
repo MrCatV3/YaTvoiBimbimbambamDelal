@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 
 namespace YaTvoiBimbimbambamDelal.Classes
 {
@@ -51,8 +53,69 @@ namespace YaTvoiBimbimbambamDelal.Classes
         public void FindName(string Char)
         {
             Item find = _inventory.Find(x => x.Name.Contains(Char));
-            find.Display();
+            Console.WriteLine(find.Display());
         }
+        public void FiltrW()
+        {
+            var FW = _inventory.Where(x => x.Type == "оружие");
+            
+            foreach (var item in FW)
+            {
+                Console.WriteLine(item.Display());
+            }
+        }
+        public void FiltrA()
+        {
+            var FA = _inventory.Where(x => x.Type == "броня");
 
+            foreach (var item in FA)
+            {
+                Console.WriteLine(item.Display());
+            }
+        }
+        public void FiltrO()
+        {
+            var FO = _inventory.Where(x => x.Type == "другое");
+
+            foreach (var item in FO)
+            {
+                Console.WriteLine(item.Display());
+            }
+        }
+        public void SetWeapon()
+        {
+            Console.WriteLine("Выбор оружия:\n");
+            var FW = _inventory.Where(x => x.Type == "оружие");
+            foreach (var item in FW)
+            {
+                Console.WriteLine(item.Display());
+            }
+            Console.WriteLine("Введите имя предмета который хотите экипировать: ");
+            string nameW = Console.ReadLine();
+            Item findW = _inventory.Find(x => x.Name.Contains(nameW));
+            findW.Status = true;
+        }
+        public void SetArmor()
+        {
+            Console.WriteLine("Выбор брони:\n");
+            var FA = _inventory.Where(x => x.Type == "броня");
+            foreach (var item in FA)
+            {
+                Console.WriteLine(item.Display());
+            }
+            Console.WriteLine("Введите имя предмета который хотите экипировать: ");
+            string nameA = Console.ReadLine();
+            Item findA = _inventory.Find(x => x.Name.Contains(nameA));
+            findA.Status = true;
+        }
+        public void DisplayEquip()
+        {
+            var DE = _inventory.Where(x => x.Status == true);
+            Console.WriteLine("Экипированные предметы: ");
+            foreach (var item in DE)
+            {
+                Console.WriteLine(item.Display());
+            }
+        }
     }
 }

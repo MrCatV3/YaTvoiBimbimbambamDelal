@@ -53,7 +53,14 @@ namespace YaTvoiBimbimbambamDelal.Classes
         public void FindName(string Char)
         {
             Item find = _inventory.Find(x => x.Name.Contains(Char));
-            Console.WriteLine(find.Display());
+            if (find != null) Console.WriteLine(find.Display());
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nПредмета с таким именем нет в инвентаре");
+                Console.ResetColor();
+            }
+
         }
         public void FiltrW()
         {
@@ -84,34 +91,60 @@ namespace YaTvoiBimbimbambamDelal.Classes
         }
         public void SetWeapon()
         {
-            Console.WriteLine("Выбор оружия:\n");
+            if (_inventory.Find(x => x.Status == true && x.Type == "оружие") != null)
+            {
+                Item findException = _inventory.Find(x => x.Status == true && x.Type == "оружие");
+                findException.Status = false;
+            }
+            Console.WriteLine("\nВыбор оружия:\n");
             var FW = _inventory.Where(x => x.Type == "оружие");
             foreach (var item in FW)
             {
                 Console.WriteLine(item.Display());
             }
-            Console.WriteLine("Введите имя предмета который хотите экипировать: ");
+            Console.WriteLine("\nВведите имя предмета который хотите экипировать: ");
             string nameW = Console.ReadLine();
             Item findW = _inventory.Find(x => x.Name.Contains(nameW));
-            findW.Status = true;
+            if (findW != null) findW.Status = true;
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nПредмета с таким именем нет в инвентаре");
+                Console.ResetColor();
+            }
+
         }
+        
         public void SetArmor()
         {
-            Console.WriteLine("Выбор брони:\n");
+            if (_inventory.Find(x => x.Status == true && x.Type == "броня") != null)
+            {
+                Item findException = _inventory.Find(x => x.Status == true && x.Type == "броня");
+                findException.Status = false;
+            }
+            Console.WriteLine("\nВыбор брони:\n");
             var FA = _inventory.Where(x => x.Type == "броня");
             foreach (var item in FA)
             {
                 Console.WriteLine(item.Display());
             }
-            Console.WriteLine("Введите имя предмета который хотите экипировать: ");
+            Console.WriteLine("\nВведите имя предмета который хотите экипировать: ");
             string nameA = Console.ReadLine();
             Item findA = _inventory.Find(x => x.Name.Contains(nameA));
-            findA.Status = true;
+            if (findA != null) findA.Status = true;
+
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nПредмета с таким именем нет в инвентаре");
+                Console.ResetColor();
+            }
+            
         }
         public void DisplayEquip()
         {
             var DE = _inventory.Where(x => x.Status == true);
-            Console.WriteLine("Экипированные предметы: ");
+            Console.WriteLine("\nЭкипированные предметы: ");
             foreach (var item in DE)
             {
                 Console.WriteLine(item.Display());

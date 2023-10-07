@@ -7,7 +7,6 @@ namespace YaTvoiBimbimbambamDelal.Classes
     class Weapon : Item
     {
         public double Damage { get; set; }
-
         public Weapon(double damage, string name, double weight, double cost, string type, bool status) 
             : base(name, weight, cost, type, status)
         {

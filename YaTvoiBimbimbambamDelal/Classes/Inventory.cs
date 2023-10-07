@@ -15,7 +15,6 @@ namespace YaTvoiBimbimbambamDelal.Classes
             _inventory = new List<Item>();
             
         }
-
         public void AddItem(Item item)
         {
             if (_inventory.Count < Capacity)
@@ -29,7 +28,17 @@ namespace YaTvoiBimbimbambamDelal.Classes
                 Console.ResetColor();
             }
         }
-
+        public int Input()
+        {
+            int x;
+            string InputStr = Console.ReadLine();
+            while (!Int32.TryParse(InputStr, out x))
+            {
+                Console.WriteLine("Повторный ввод");
+                InputStr = Console.ReadLine();
+            }
+            return x;
+        }
         public void DisplayAll()
         {
             int id = 1;
@@ -38,7 +47,6 @@ namespace YaTvoiBimbimbambamDelal.Classes
                 Console.WriteLine(id++ + "\t" + item.Display());
             }
         }
-
         public void SortName()
         {
             _inventory.Sort(delegate (Item x, Item y)
@@ -101,8 +109,6 @@ namespace YaTvoiBimbimbambamDelal.Classes
         }
         public void SetWeapon()
         {
-            
-
             int temp = 1;
             Console.WriteLine("\nВыбор оружия:\n");
             var FW = _inventory.Where(x => x.Type == "оружие");
@@ -111,18 +117,15 @@ namespace YaTvoiBimbimbambamDelal.Classes
                 Console.WriteLine(temp++ + "\t" + item.Display());
             }
             Console.WriteLine("\nВведите номер предмета который хотите экипировать: ");
-            int nameW = Int32.Parse(Console.ReadLine());
+            int nameW = Input();
             if (nameW >= 1 && nameW <= FW.Count())
             {
-
                 //проверка на наличие экипированного оружия
                 if (_inventory.Find(x => x.Status == true && x.Type == "оружие") != null)
                 {
                     Item findException = _inventory.Find(x => x.Status == true && x.Type == "оружие");
                     findException.Status = false;
                 }
-
-
                 Item findW = FW.ElementAt(nameW - 1);
                 if (findW != null) findW.Status = true;
                 else
@@ -131,7 +134,6 @@ namespace YaTvoiBimbimbambamDelal.Classes
                     Console.WriteLine("\nПредмета с таким именем нет в инвентаре");
                     Console.ResetColor();
                 }
-                
             }
             else
             {
@@ -140,11 +142,8 @@ namespace YaTvoiBimbimbambamDelal.Classes
                 Console.ResetColor();
             }
         }
-        
         public void SetArmor()
         {
-            
-
             int temp = 1;
             Console.WriteLine("\nВыбор брони:\n");
             var FA = _inventory.Where(x => x.Type == "броня");
@@ -153,7 +152,7 @@ namespace YaTvoiBimbimbambamDelal.Classes
                 Console.WriteLine(temp++ + "\t" + item.Display());
             }
             Console.WriteLine("\nВведите номер предмета который хотите экипировать: ");
-            int nameA = Int32.Parse(Console.ReadLine());
+            int nameA = Input();
             if (nameA >= 1 && nameA <= FA.Count())
             {
                 //проверка на наличие экипированной брони
@@ -162,8 +161,6 @@ namespace YaTvoiBimbimbambamDelal.Classes
                     Item findException = _inventory.Find(x => x.Status == true && x.Type == "броня");
                     findException.Status = false;
                 }
-
-
                 Item findA = FA.ElementAt(nameA - 1);
                 if (findA != null) findA.Status = true;
                 else

@@ -14,12 +14,14 @@ namespace YaTvoiBimbimbambamDelal
             create2();
             while (i != 12)
             {
+
                 Console.WriteLine("\n 1 - Вывод всего инвентаря, 2 - Сортировка по имени, 3 - Сортировка по цене, 4 - Сортировка по весу\n 5 - Поиск предмета по названию, 6 - Фильтр по оружию, 7 - Фильтр по броне, 8 - Фильтр по другим предметам\n 9 - Экипировать броню, 10 - Экипировать оружие, 11 - Просмотр экипированных предметов, 12 - Выход");
                 Console.Write("\nВведите номер действия: ");
-                i = Int32.Parse(Console.ReadLine());
+                i = _inventory.Input();
                 switch (i)
                 {
                     case 1:
+
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Magenta;
                         Console.WriteLine("\nВаш инвентарь:");
@@ -133,17 +135,7 @@ namespace YaTvoiBimbimbambamDelal
             _inventory.AddItem(new Weapon(500, "Перчатки бьющие истинным уроном", 3, 4000, "оружие", false));
             _inventory.AddItem(new Weapon(20, "Копьё охотника", 5, 1, "оружие", false));
             _inventory.AddItem(new Weapon(1, "Ржавый железный меч", 0.9, 0, "оружие", false));
-            _inventory.AddItem(new Weapon(1, "Ржавый железный меч", 0.9, 0, "оружие", false));
-            _inventory.AddItem(new Weapon(1, "Ржавый железный меч", 0.9, 0, "оружие", false));
-            _inventory.AddItem(new Weapon(1, "Ржавый железный меч", 0.9, 0, "оружие", false));
-            _inventory.AddItem(new Weapon(1, "Ржавый железный меч", 0.9, 0, "оружие", false));
-            _inventory.AddItem(new Weapon(1, "Ржавый железный меч", 0.9, 0, "оружие", false));
-            _inventory.AddItem(new Weapon(1, "Ржавый железный меч", 0.9, 0, "оружие", false));
-            _inventory.AddItem(new Weapon(1, "Ржавый железный меч", 0.9, 0, "оружие", false));
-            _inventory.AddItem(new Weapon(1, "Ржавый железный меч", 0.9, 0, "оружие", false));
-            _inventory.AddItem(new Weapon(1, "Ржавый железный меч", 0.9, 0, "оружие", false));
-            _inventory.AddItem(new Weapon(1, "Ржавый железный меч", 0.9, 0, "оружие", false));
-            _inventory.AddItem(new Weapon(1, "Ржавый железный меч", 0.9, 0, "оружие", false));
+            
         }
     }
 }

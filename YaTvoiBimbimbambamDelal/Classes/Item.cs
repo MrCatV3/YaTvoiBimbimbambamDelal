@@ -11,7 +11,6 @@ namespace YaTvoiBimbimbambamDelal.Classes
         public double Cost { get; set; }
         public string Type { get; set; }
         public bool Status { get; set; }
-
         public Item(string name, double weight, double cost, string type, bool status)
         {
             Name = name;

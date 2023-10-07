@@ -9,15 +9,25 @@ namespace YaTvoiBimbimbambamDelal.Classes
     class Inventory
     {
         private List<Item> _inventory;
-
+        public int Capacity { get; } = 32;
         public Inventory()
         {
-            _inventory = new List<Item>(32);
+            _inventory = new List<Item>();
+            
         }
 
         public void AddItem(Item item)
         {
-            _inventory.Add(item);
+            if (_inventory.Count < Capacity)
+            {
+                _inventory.Add(item);
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("В инвентаре достигнуто максимальное количество предметов");
+                Console.ResetColor();
+            }
         }
 
         public void DisplayAll()
@@ -65,81 +75,112 @@ namespace YaTvoiBimbimbambamDelal.Classes
         public void FiltrW()
         {
             var FW = _inventory.Where(x => x.Type == "оружие");
-            
+            int temp = 1;
             foreach (var item in FW)
             {
-                Console.WriteLine(item.Display());
+                Console.WriteLine(temp++ + "\t" + item.Display());
             }
         }
         public void FiltrA()
         {
             var FA = _inventory.Where(x => x.Type == "броня");
-
+            int temp = 1;
             foreach (var item in FA)
             {
-                Console.WriteLine(item.Display());
+                Console.WriteLine(temp++ + "\t" + item.Display());
             }
         }
         public void FiltrO()
         {
             var FO = _inventory.Where(x => x.Type == "другое");
-
+            int temp = 1;
             foreach (var item in FO)
             {
-                Console.WriteLine(item.Display());
+                Console.WriteLine(temp++ + "\t" + item.Display());
             }
         }
         public void SetWeapon()
         {
-            if (_inventory.Find(x => x.Status == true && x.Type == "оружие") != null)
-            {
-                Item findException = _inventory.Find(x => x.Status == true && x.Type == "оружие");
-                findException.Status = false;
-            }
+            
+
+            int temp = 1;
             Console.WriteLine("\nВыбор оружия:\n");
             var FW = _inventory.Where(x => x.Type == "оружие");
             foreach (var item in FW)
             {
-                Console.WriteLine(item.Display());
+                Console.WriteLine(temp++ + "\t" + item.Display());
             }
-            Console.WriteLine("\nВведите имя предмета который хотите экипировать: ");
-            string nameW = Console.ReadLine();
-            Item findW = _inventory.Find(x => x.Name.Contains(nameW));
-            if (findW != null) findW.Status = true;
+            Console.WriteLine("\nВведите номер предмета который хотите экипировать: ");
+            int nameW = Int32.Parse(Console.ReadLine());
+            if (nameW >= 1 && nameW <= FW.Count())
+            {
+
+                //проверка на наличие экипированного оружия
+                if (_inventory.Find(x => x.Status == true && x.Type == "оружие") != null)
+                {
+                    Item findException = _inventory.Find(x => x.Status == true && x.Type == "оружие");
+                    findException.Status = false;
+                }
+
+
+                Item findW = FW.ElementAt(nameW - 1);
+                if (findW != null) findW.Status = true;
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("\nПредмета с таким именем нет в инвентаре");
+                    Console.ResetColor();
+                }
+                
+            }
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("\nПредмета с таким именем нет в инвентаре");
+                Console.WriteLine("\nПредмета с таким номером нет в списке");
                 Console.ResetColor();
             }
-
         }
         
         public void SetArmor()
         {
-            if (_inventory.Find(x => x.Status == true && x.Type == "броня") != null)
-            {
-                Item findException = _inventory.Find(x => x.Status == true && x.Type == "броня");
-                findException.Status = false;
-            }
+            
+
+            int temp = 1;
             Console.WriteLine("\nВыбор брони:\n");
             var FA = _inventory.Where(x => x.Type == "броня");
             foreach (var item in FA)
             {
-                Console.WriteLine(item.Display());
+                Console.WriteLine(temp++ + "\t" + item.Display());
             }
-            Console.WriteLine("\nВведите имя предмета который хотите экипировать: ");
-            string nameA = Console.ReadLine();
-            Item findA = _inventory.Find(x => x.Name.Contains(nameA));
-            if (findA != null) findA.Status = true;
+            Console.WriteLine("\nВведите номер предмета который хотите экипировать: ");
+            int nameA = Int32.Parse(Console.ReadLine());
+            if (nameA >= 1 && nameA <= FA.Count())
+            {
+                //проверка на наличие экипированной брони
+                if (_inventory.Find(x => x.Status == true && x.Type == "броня") != null)
+                {
+                    Item findException = _inventory.Find(x => x.Status == true && x.Type == "броня");
+                    findException.Status = false;
+                }
 
+
+                Item findA = FA.ElementAt(nameA - 1);
+                if (findA != null) findA.Status = true;
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("\nПредмета с таким именем нет в инвентаре");
+                    Console.ResetColor();
+                }
+
+            }
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("\nПредмета с таким именем нет в инвентаре");
+                Console.WriteLine("\nПредмета с таким номером нет в списке");
                 Console.ResetColor();
             }
-            
+
         }
         public void DisplayEquip()
         {
